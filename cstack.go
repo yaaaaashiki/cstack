@@ -6,6 +6,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/yaaaaashiki/cstack/db"
+	"github.com/yaaaaashiki/cstack/domain/repository"
+	"github.com/yaaaaashiki/cstack/interfaceadapter/controller"
+	"github.com/yaaaaashiki/cstack/usecase"
 )
 
 // This holds database connection and router settings based on gin.
@@ -49,7 +52,6 @@ func (s *Server) Run(addr string) {
 }
 
 func (s *Server) Route() {
-
 	r := s.gin
 
 	r.Static("/image", "./assets/image")
@@ -62,4 +64,14 @@ func (s *Server) Route() {
 		c.HTML(200, "index.html", nil)
 	})
 
+	api := r.Group("/api")
+
+	userRepository := repository.NewUserRepository(s.db)
+
+	registerUserCase := usecase.NewRegisterUseCase(userRepository)
+
+	registerUserController := controller.NewRegisterController(registerUserCase)
+
+	//register user
+	api.POST("/users", registerUserController.Execute)
 }
