@@ -1,7 +1,7 @@
 .*
 !.git*
 /dbconfig.prod.yml
-/cmd/maiscript/maiscript
+/cmd/cstack/cstack
 /*.tar.gz
 
 ### https://raw.github.com/github/gitignore/35c010258fc790ad769033e9ccfb1021178f2925/Global/macOS.gitignore
