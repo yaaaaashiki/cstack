@@ -1,9 +1,18 @@
-# c-stack
+## c-stack
 
 Escapism var3
 現実逃避の時間です ∩( ´∀｀)∩ﾄﾞｳｿﾞ (っ´∀｀)っ))ﾖﾛｼ!ｸ
 
 Go + React + Redux
+
+
+## Golang version
+* 1.9 
+
+
+## mysql version
+* 5.7 
+
 
 ## dbconfig.yml の設置
 
