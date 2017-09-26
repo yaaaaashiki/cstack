@@ -15,8 +15,8 @@ type RegisterController struct {
 
 //input data by the front view
 type InputField struct {
-	Biography string `binding:"required" json:"biography"`
-	Sex       int    `binding:"required" json:"sex"`
+	Email         string `binding:"required" json:"email"`
+	InputPassword string `binding:"required" json:"input_password"`
 }
 
 type RegisterRequest struct {
@@ -42,9 +42,6 @@ func (s *RegisterController) Execute(c *gin.Context) {
 		helper.ResponseErrorJSON(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-
-	//for debug
-	helper.SaveSessionForDebug(c, uint(helper.CreateRand()), "helperSessionUser", "helperSessionUser.com", "")
 
 	if err != nil {
 		helper.ResponseErrorJSON(c, http.StatusInternalServerError, err.Error())
