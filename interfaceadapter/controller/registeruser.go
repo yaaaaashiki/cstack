@@ -9,6 +9,8 @@ import (
 	"github.com/yaaaaashiki/cstack/usecase"
 )
 
+const Rand = 100
+
 type RegisterController struct {
 	registerUseCase *usecase.RegisterUseCase
 }
@@ -16,7 +18,7 @@ type RegisterController struct {
 //input data by the front view
 type InputField struct {
 	Email         string `binding:"required" json:"email"`
-	InputPassword string `binding:"required" json:"input_password"`
+	InputPassword string `binding:"required" json:"password"`
 }
 
 type RegisterRequest struct {
@@ -47,6 +49,9 @@ func (s *RegisterController) Execute(c *gin.Context) {
 		helper.ResponseErrorJSON(c, http.StatusInternalServerError, err.Error())
 		return
 	}
+
+	salt := helper.Salt(Rand)
+	salted := helper.Stretch(in.InputPassword, salt)
 
 	req := &usecase.RegisterRequest{
 		Name:      name,
