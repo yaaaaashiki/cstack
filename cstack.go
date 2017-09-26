@@ -51,4 +51,15 @@ func (s *Server) Run(addr string) {
 func (s *Server) Route() {
 
 	r := s.gin
+
+	r.Static("/image", "./assets/image")
+	r.Static("/css", "./assets/css")
+	r.Static("/js", "./assets/js")
+
+	r.LoadHTMLGlob("view/*")
+
+	r.GET("/", func(c *gin.Context) {
+		c.HTML(200, "index.html", nil)
+	})
+
 }
