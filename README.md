@@ -7,10 +7,12 @@ Go + React + Redux
 
 
 ## Golang version
+
 * 1.9 
 
 
 ## mysql version
+
 * 5.7 
 
 
@@ -45,4 +47,4 @@ make run
 ## テスト
 ```
 make test
-``
+```
