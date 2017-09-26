@@ -6,5 +6,5 @@ type User struct {
 	Email     string `json:"email" gorm:"column:email"`
 	Salt      string `json:"salt" gorm:"column:salt"`
 	Salted    string `json:"salted" gorm:"column:salted"`
-	IconImage string `json:"icon_image"`
+	IconImage string `json:"icon_image" gorm:"column:icon_image"`
 }

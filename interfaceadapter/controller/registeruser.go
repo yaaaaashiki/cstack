@@ -17,15 +17,17 @@ type RegisterController struct {
 
 //input data by the front view
 type InputField struct {
+	Name          string `binding:"required" json:"name"`
 	Email         string `binding:"required" json:"email"`
 	InputPassword string `binding:"required" json:"password"`
+	IconImage     string `binding:"required" json:"icon_image"`
 }
 
 type RegisterRequest struct {
 	Name      string `binding:"required" json:"name"`
 	Email     string `binding:"required" json:"email"`
-	Salt      string `json:"salt" gorm:"column:salt"`
-	Salted    string `json:"salted" gorm:"column:salted"`
+	Salt      string `binding:"required" json:"salt"`
+	Salted    string `binding:"required" json:"salted"`
 	IconImage string `binding:"required" json:"icon_image"`
 }
 
@@ -45,20 +47,15 @@ func (s *RegisterController) Execute(c *gin.Context) {
 		return
 	}
 
-	if err != nil {
-		helper.ResponseErrorJSON(c, http.StatusInternalServerError, err.Error())
-		return
-	}
-
 	salt := helper.Salt(Rand)
 	salted := helper.Stretch(in.InputPassword, salt)
 
 	req := &usecase.RegisterRequest{
-		Name:      name,
-		Email:     email,
+		Name:      in.Name,
+		Email:     in.Email,
 		Salt:      salt,
 		Salted:    salted,
-		IconImage: userPicture,
+		IconImage: in.IconImage,
 	}
 
 	res, err := s.registerUseCase.Execute(req)

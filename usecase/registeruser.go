@@ -13,11 +13,11 @@ type RegisterUseCase struct {
 
 type RegisterRequest struct {
 	ID        uint   `json:"id" gorm:"column:id"`
-	Name      string `binding:"required" json:"name"`
-	Email     string `binding:"required" json:"email"`
+	Name      string `json:"name" gorm:"column:name"`
+	Email     string `json:"email" gorm:"column:email"`
 	Salt      string `json:"salt" gorm:"column:salt"`
 	Salted    string `json:"salted" gorm:"column:salted"`
-	IconImage string `binding:"required" json:"icon_image"`
+	IconImage string `json:"icon_image" gorm:"column:icon_image"`
 }
 
 type RegisterResponse struct {
