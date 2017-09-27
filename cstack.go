@@ -67,11 +67,17 @@ func (s *Server) Route() {
 	api := r.Group("/api")
 
 	userRepository := repository.NewUserRepository(s.db)
+	itemRepository := repository.NewItemRepository(s.db)
 
 	registerUserCase := usecase.NewRegisterUseCase(userRepository)
+	findAllItemsUseCase := usecase.NewFindAllItemsUseCase(itemRepository)
 
 	registerUserController := controller.NewRegisterController(registerUserCase)
+	findAllItemsController := controller.NewFindAllItemsController(findAllItemsUseCase)
 
 	//register user
 	api.POST("/users", registerUserController.Execute)
+
+	//find all items by user id
+	api.GET("/users/:userId", findAllItemsController.Execute)
 }
