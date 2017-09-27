@@ -47,6 +47,11 @@ func (s *LoginController) Execute(c *gin.Context) {
 		helper.ResponseError(c, http.StatusUnauthorized, res.Error.ErrorCode, res.Error.Message)
 		return
 	}
-	helper.SaveSession(c, payload.Email, res.UserId)
+
+	if err := helper.SaveSession(c, payload.Email, res.UserId); err != nil{
+		c.AbortWithError(http.StatusInternalServerError, err)
+		return
+	}
+
 	c.JSON(http.StatusOK, gin.H{"user_id": res.UserId})
 }
