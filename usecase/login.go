@@ -17,7 +17,7 @@ type LoginRequest struct {
 type LoginResponse struct {
 	Success bool
 	Error   *helper.Error
-	UserId  int
+	UserId  uint
 }
 
 func NewLoginUseCase(eventRepository *repository.UserRepository) *LoginUseCase {
