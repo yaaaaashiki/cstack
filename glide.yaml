@@ -1,6 +1,9 @@
 package: github.com/yaaaaashiki/cstack
 import:
+- package: github.com/gin-contrib/sessions
 - package: github.com/gin-gonic/gin
+  subpackages:
+  - binding
 - package: github.com/go-sql-driver/mysql
 - package: github.com/jinzhu/gorm
 - package: github.com/joho/godotenv
