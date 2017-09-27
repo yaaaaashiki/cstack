@@ -5,10 +5,10 @@ DROP TABLE IF EXISTS `items`;
 
 CREATE TABLE `items` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned NOT NULL DEFAULT '',
+  `user_id` int(11) unsigned NOT NULL,
   `name` varchar(255) NOT NULL DEFAULT '',
-  `price` bigint(255)  NOT NULL DEFAULT '',
-  `current_payment_price` bigint(255) NOT NULL DEFAULT '',
+  `price` bigint(255)  NOT NULL,
+  `current_payment_price` bigint(255) NOT NULL,
   `icon_image` varchar(255) DEFAULT '',
   `description` varchar(255) DEFAULT '',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
