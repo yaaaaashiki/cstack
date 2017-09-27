@@ -16,12 +16,6 @@ Go + React + Redux
 * 5.7 
 
 
-## dbconfig.yml の設置
-
-ルートディレクトリに設置します.
-git 上で ignore しているので各々よろしくお願いします.
-
-
 ## 依存パッケージ管理 
 
 [glide](https://github.com/Masterminds/glide) で管理します. 
