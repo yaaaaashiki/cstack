@@ -3,6 +3,7 @@ package cstack
 import (
 	"log"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/yaaaaashiki/cstack/db"
@@ -53,6 +54,10 @@ func (s *Server) Run(addr string) {
 
 func (s *Server) Route() {
 	r := s.gin
+
+	// cookie manager initialize
+	store := sessions.NewCookieStore([]byte("secret"))
+	r.Use(sessions.Sessions("mysession", store))
 
 	r.Static("/image", "./assets/image")
 	r.Static("/css", "./assets/css")
