@@ -70,9 +70,11 @@ func (s *Server) Route() {
 	itemRepository := repository.NewItemRepository(s.db)
 
 	registerUserCase := usecase.NewRegisterUseCase(userRepository)
+	loginUseCase := usecase.NewLoginUseCase(userRepository)
 	findAllItemsUseCase := usecase.NewFindAllItemsUseCase(itemRepository)
 
 	registerUserController := controller.NewRegisterController(registerUserCase)
+	loginController := controller.NewLoginController(loginUseCase)
 	findAllItemsController := controller.NewFindAllItemsController(findAllItemsUseCase)
 
 	//auth
