@@ -17,7 +17,7 @@ type LoginRequest struct {
 type LoginResponse struct {
 	Success bool
 	Error   *helper.Error
-	UserId  uint
+	UserID  uint
 }
 
 func NewLoginUseCase(eventRepository *repository.UserRepository) *LoginUseCase {
@@ -27,7 +27,7 @@ func NewLoginUseCase(eventRepository *repository.UserRepository) *LoginUseCase {
 }
 
 func (f *LoginUseCase) Execute(request *LoginRequest) (response *LoginResponse, error error) { //TODO test
-	userId, salt, salted, err := f.userRepository.GetPassword(request.Email)
+	userID, salt, salted, err := f.userRepository.GetPassword(request.Email)
 	if err != nil {
 		return nil, err
 	}
@@ -41,5 +41,5 @@ func (f *LoginUseCase) Execute(request *LoginRequest) (response *LoginResponse, 
 		return &LoginResponse{Success: false, Error: helper.NewError(ErrorIncorrectPassword, "incorrect password")}, nil
 	}
 
-	return &LoginResponse{Success: true, Error: nil, UserId: userId}, nil
+	return &LoginResponse{Success: true, Error: nil, UserID: userID}, nil
 }

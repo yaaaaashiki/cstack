@@ -48,10 +48,10 @@ func (s *LoginController) Execute(c *gin.Context) {
 		return
 	}
 
-	if err := helper.SaveSession(c, payload.Email, res.UserId); err != nil{
+	if err := helper.SaveSession(c, payload.Email, res.UserID); err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"user_id": res.UserId})
+	c.JSON(http.StatusOK, gin.H{"user_id": res.UserID})
 }
