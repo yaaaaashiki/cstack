@@ -16,30 +16,30 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 }
 
 func (f *UserRepository) FindAll() ([]model.User, error) {
-	eventEx := []model.User{}
-	if err := f.db.Find(&eventEx).Error; err != nil {
+	users := []model.User{}
+	if err := f.db.Find(&users).Error; err != nil {
 		return nil, err
 	}
 
-	return eventEx, nil
+	return users, nil
 }
 
 func (f *UserRepository) FindByID(id int) (*model.User, error) {
-	eventEx := model.User{}
-	if err := f.db.Find(&eventEx, "id=?", id).Error; err != nil {
+	users := model.User{}
+	if err := f.db.Find(&users, "id=?", id).Error; err != nil {
 		return nil, err
 	}
-	return &eventEx, nil
+	return &users, nil
 }
 
 func (f *UserRepository) FindByIDOrNil(id uint) (*model.User, error) {
 	user := model.User{}
-	find := f.db.Find(&user, "id=?", id)
-	if find.RecordNotFound() {
+	res := f.db.Find(&user, "id=?", id)
+	if res.RecordNotFound() {
 		return nil, nil
 	} else {
-		if find.Error != nil {
-			return nil, find.Error
+		if res.Error != nil {
+			return nil, res.Error
 		}
 	}
 	return &user, nil
@@ -47,12 +47,12 @@ func (f *UserRepository) FindByIDOrNil(id uint) (*model.User, error) {
 
 func (f *UserRepository) FindByEmailOrNil(email string) (*model.User, error) {
 	user := model.User{}
-	find := f.db.Find(&user, "email=?", email)
-	if find.RecordNotFound() {
+	res := f.db.Find(&user, "email=?", email)
+	if res.RecordNotFound() {
 		return nil, nil
 	} else {
-		if find.Error != nil {
-			return nil, find.Error
+		if res.Error != nil {
+			return nil, res.Error
 		}
 	}
 	return &user, nil

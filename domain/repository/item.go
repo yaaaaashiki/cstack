@@ -21,7 +21,7 @@ func (f *ItemRepository) FindAll() ([]model.Item, error) {
 		return nil, err
 	}
 
-	return eventEx, nil
+	return items, nil
 }
 
 func (f *ItemRepository) FindByID(id int) (*model.Item, error) {
