@@ -3,7 +3,8 @@ package helper
 import "github.com/gin-gonic/gin"
 
 type Error struct {
-	Message string `json:"message"`
+	ErrorCode int    `json:"error_code"`
+	Message   string `json:"message"`
 }
 
 func NewError(errorCode int, message string) *Error {
