@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `items`;
 
 CREATE TABLE `items` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(255) DEFAULT '',
+  `user_id` int(11) unsigned NOT NULL DEFAULT '',
   `name` varchar(255) NOT NULL DEFAULT '',
   `price` bigint(255)  NOT NULL DEFAULT '',
   `current_payment_price` bigint(255) NOT NULL DEFAULT '',
