@@ -4,63 +4,51 @@ import (
 	"github.com/yaaaaashiki/cstack/domain/repository"
 )
 
-type FindAllCompaniesUseCase struct {
+type FindAllItemsUseCase struct {
 	itemRepository *repository.ItemRepository
 }
 
-type FindAllCompaniesResponse struct {
-	Companies []*itemDTO
+type FindAllItemsResponse struct {
+	Items []*itemDTO
 }
 
 type itemDTO struct {
-	ID         uint   `json:"id" gorm:"column:id"`
-	FacebookID uint   `json:"facebook_id"`
-	Name       string `json:"name"`
-	Email      string `json:"email"`
-	URL        string `json:"url" gorm:"column:url"`
-	Biography  string `json:"biography"`
-	Zipcode    string `json:"zipcode" gorm:"column:zipcode"`
-	Address1   string `json:"address1" gorm:"address1"`
-	Address2   string `json:"address2" gorm:"address2"`
-	Tel1       string `json:"tel1" gorm:"tel1"`
-	Tel2       string `json:"tel2" gorm:"tel2"`
-	Tel3       string `json:"tel3" gorm:"tel3"`
-	IconImage  string `json:"icon_image"`
+	ID                  uint   `json:"id" gorm:"column:id"`
+	UserID              uint   `json:"user_id" gorm:"column:user_id"`
+	Name                string `json:"name" gorm:"column:name"`
+	Price               string `json:"price" gorm:"column:price"`
+	CurrentPaymentPrice string `json:"current_payment_price" gorm:"column:current_payment_price"`
+	IconImage           string `json:"icon_image" gorm:"column:icon_image"`
+	Description         string `json:"description" gorm:"column:description"`
 }
 
-func NewFindAllCompanaisUseCase(itemRepository *repository.ItemRepository) *FindAllCompaniesUseCase {
-	return &FindAllCompaniesUseCase{
+func NewFindAllItemsUseCase(itemRepository *repository.ItemRepository) *FindAllItemsUseCase {
+	return &FindAllItemsUseCase{
 		itemRepository: itemRepository,
 	}
 }
 
-//Before running this function, should be full with companies table column
-func (f *FindAllCompaniesUseCase) Execute() (*FindAllCompaniesResponse, error) {
+//Before running this function, should be full with items table column
+func (f *FindAllItemsUseCase) Execute() (*FindAllItemsResponse, error) {
 	res, err := f.itemRepository.FindAll()
 	if err != nil {
 		return nil, err
 	}
 
-	c := &FindAllCompaniesResponse{
-		Companies: make([]*itemDTO, 0),
+	c := &FindAllItemsResponse{
+		Items: make([]*itemDTO, 0),
 	}
 
 	for _, v := range res {
 		itemDTO := &itemDTO{}
 		itemDTO.ID = uint(v.ID)
-		itemDTO.FacebookID = v.FacebookID
+		itemDTO.UserID = uint(v.UserID)
 		itemDTO.Name = v.Name
-		itemDTO.Email = v.Email
-		itemDTO.URL = v.URL
-		itemDTO.Biography = v.Biography
-		itemDTO.Zipcode = v.Zipcode
-		itemDTO.Address1 = v.Address1
-		itemDTO.Address2 = v.Address2
-		itemDTO.Tel1 = v.Tel1
-		itemDTO.Tel2 = v.Tel2
-		itemDTO.Tel3 = v.Tel3
+		itemDTO.Price = string(v.Price)
+		itemDTO.CurrentPaymentPrice = string(v.CurrentPaymentPrice)
 		itemDTO.IconImage = v.IconImage
-		c.Companies = append(c.Companies, itemDTO)
+		itemDTO.Description = v.Description
+		c.Items = append(c.Items, itemDTO)
 	}
 
 	return c, nil
