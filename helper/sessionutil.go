@@ -23,7 +23,7 @@ func GetSession(g *gin.Context) (email string, userId uint, error error) {
 	return emailValue.(string), userIdValue.(uint), nil
 }
 
-func SaveSession(g *gin.Context, email string, userId int) {
+func SaveSession(g *gin.Context, email string, userId uint) {
 	session := sessions.Default(g)
 	session.Set("email", email)
 	session.Set("userId", uint(userId))
