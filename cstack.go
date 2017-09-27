@@ -75,8 +75,9 @@ func (s *Server) Route() {
 	registerUserController := controller.NewRegisterController(registerUserCase)
 	findAllItemsController := controller.NewFindAllItemsController(findAllItemsUseCase)
 
-	//register user
+	//auth
 	api.POST("/users", registerUserController.Execute)
+	api.POST("/auth", loginController.Execute)
 
 	//find all items by user id
 	api.GET("/users/:userId/items", findAllItemsController.Execute)
