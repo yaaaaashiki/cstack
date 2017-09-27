@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"github.com/yaaaaashiki/cstack/domain/repository"
+	"strconv"
 )
 
 type FindAllItemsUseCase struct {
@@ -44,8 +45,8 @@ func (f *FindAllItemsUseCase) Execute(userID string) (*FindAllItemsResponse, err
 		itemDTO.ID = uint(v.ID)
 		itemDTO.UserID = uint(v.UserID)
 		itemDTO.Name = v.Name
-		itemDTO.Price = string(v.Price)
-		itemDTO.CurrentPaymentPrice = string(v.CurrentPaymentPrice)
+		itemDTO.Price = strconv.Itoa(v.Price)
+		itemDTO.CurrentPaymentPrice = strconv.Itoa(v.CurrentPaymentPrice)
 		itemDTO.IconImage = v.IconImage
 		itemDTO.Description = v.Description
 		c.Items = append(c.Items, itemDTO)

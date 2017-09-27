@@ -27,7 +27,5 @@ func (s *FindAllItemsController) Execute(c *gin.Context) {
 		return
 	}
 
-	//res := presenter.FindAllItems(rawRes)
-
-	c.JSON(http.StatusOK, &rawRes)
+	c.JSON(http.StatusOK, rawRes.Items)
 }
