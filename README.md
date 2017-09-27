@@ -30,12 +30,26 @@ glide install
 
 
 
+## seed 入れ直し (env: develop)
+
+```
+make developenv 
+```
+
+
 ## 起動
 
 ```
 make run
 ```
 
+
+## seed 入れ直し (env: test)
+
+テスト実行前には必ず実行してください.
+```
+make testenv
+```
 
 
 ## テスト
