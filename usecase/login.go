@@ -36,6 +36,7 @@ func (f *LoginUseCase) Execute(request *LoginRequest) (response *LoginResponse, 
 	}
 
 	stretched := helper.Stretch(request.Password, salt)
+
 	if stretched != salted {
 		return &LoginResponse{Success: false, Error: helper.NewError(ErrorIncorrectPassword, "incorrect password")}, nil
 	}
