@@ -58,6 +58,20 @@ func (f *UserRepository) FindByEmailOrNil(email string) (*model.User, error) {
 	return &user, nil
 }
 
+// if input is empty, return empty string
+func (f *UserRepository) GetPassword(email string) (userId int, salt string, salted string, error error) { //TODO test
+	user := model.User{}
+	res := f.db.Find(&user, "email=?", email)
+	if res.RecordNotFound() {
+		return 0, "", "", nil
+	} else {
+		if res.Error != nil {
+			return 0, "", "", find.Error
+		}
+	}
+	return user.ID, user.Salt, user.Salted, nil
+}
+
 func (f *UserRepository) RegisterUser(name string, email string, salt string, salted string, iconImage string) (*model.User, error) {
 	newUser := model.User{}
 	newUser.Name = name
