@@ -7,8 +7,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
-	"github.com/yaaaaashiki/cstack//usecase"
 	"github.com/yaaaaashiki/cstack/helper"
+	"github.com/yaaaaashiki/cstack/usecase"
 )
 
 type LoginController struct {
