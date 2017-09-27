@@ -59,7 +59,7 @@ func (f *UserRepository) FindByEmailOrNil(email string) (*model.User, error) {
 }
 
 // if input is empty, return empty string
-func (f *UserRepository) GetPassword(email string) (userId uint, salt string, salted string, error error) { //TODO test
+func (f *UserRepository) GetPassword(email string) (userID uint, salt string, salted string, error error) { //TODO test
 	user := model.User{}
 	res := f.db.Find(&user, "email=?", email)
 	if res.RecordNotFound() {

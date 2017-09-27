@@ -19,7 +19,7 @@ func NewFindAllItemsController(findAllItemsUseCase *usecase.FindAllItemsUseCase)
 }
 
 func (s *FindAllItemsController) Execute(c *gin.Context) {
-	userID := c.Param("userId")
+	userID := c.Param("userID")
 
 	rawRes, err := s.findAllItemsUseCase.Execute(userID)
 	if err != nil {

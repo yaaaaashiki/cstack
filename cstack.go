@@ -82,5 +82,5 @@ func (s *Server) Route() {
 	api.POST("/auth", loginController.Execute)
 
 	//find all items by user id
-	api.GET("/users/:userId/items", findAllItemsController.Execute)
+	api.GET("/users/:userID/items", findAllItemsController.Execute)
 }
