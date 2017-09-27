@@ -11,6 +11,10 @@ func NewError(errorCode int, message string) *Error {
 	return &Error{ErrorCode: errorCode, Message: message}
 }
 
+func ResponseError(c *gin.Context, httpStatusCode, errorCode int, message string) {
+	ResponseErrorRaw(c, httpStatusCode, &Error{ErrorCode: errorCode, Message: message})
+}
+
 func ResponseErrorJSON(c *gin.Context, httpStatusCode int, message string) {
 	ResponseErrorRaw(c, httpStatusCode, &Error{Message: message})
 }
