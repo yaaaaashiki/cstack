@@ -29,8 +29,8 @@ func NewFindAllItemsUseCase(itemRepository *repository.ItemRepository) *FindAllI
 }
 
 //Before running this function, should be full with items table column
-func (f *FindAllItemsUseCase) Execute() (*FindAllItemsResponse, error) {
-	res, err := f.itemRepository.FindAll()
+func (f *FindAllItemsUseCase) Execute(userID string) (*FindAllItemsResponse, error) {
+	res, err := f.itemRepository.FindAllByUserIDOrNil(userID)
 	if err != nil {
 		return nil, err
 	}

@@ -58,6 +58,19 @@ func (f *ItemRepository) FindByEmailOrNil(email string) (*model.Item, error) {
 	return &item, nil
 }
 
+func (f *ItemRepository) FindAllByUserIDOrNil(userID string) ([]model.Item, error) {
+	items := []model.Item{}
+	res := f.db.Find(&items, "user_id=?", userID)
+	if res.RecordNotFound() {
+		return nil, nil
+	} else {
+		if res.Error != nil {
+			return nil, res.Error
+		}
+	}
+	return items, nil
+}
+
 func (f *ItemRepository) RegisterItem(name string, price int, iconImage string, description string) (*model.Item, error) {
 	newItem := model.Item{}
 	newItem.Name = name
