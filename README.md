@@ -74,7 +74,7 @@ npm run build:watch
 
 クライアントサイドのコードを watch するコマンド
 
-## seed 入れ直し (env: develop)
+## seed 入れ直し (develop)
 
 ```
 make developenv 
@@ -88,7 +88,7 @@ make run
 ```
 
 
-## seed 入れ直し (env: test)
+## seed 入れ直し (test)
 
 テスト実行前には必ず実行してください.
 ```
