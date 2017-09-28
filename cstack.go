@@ -80,11 +80,13 @@ func (s *Server) Route() {
 
 	registerUserController := controller.NewRegisterController(registerUserCase)
 	loginController := controller.NewLoginController(loginUseCase)
+	logoutController := controller.NewLogoutController()
 	findAllItemsController := controller.NewFindAllItemsController(findAllItemsUseCase)
 
 	//auth
 	api.POST("/users", registerUserController.Execute)
 	api.POST("/auth", loginController.Execute)
+	api.DELETE("/auth", logoutController.Execute)
 
 	//find all items by user id
 	api.GET("/users/:userID/items", findAllItemsController.Execute)
