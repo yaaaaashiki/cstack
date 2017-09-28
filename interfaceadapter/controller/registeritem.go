@@ -10,6 +10,8 @@ import (
 	"github.com/yaaaaashiki/cstack/usecase"
 )
 
+const ZeroValue = 0
+
 type RegisterItemController struct {
 	registerItemUseCase *usecase.RegisterItemUseCase
 }
@@ -52,7 +54,7 @@ func (s *RegisterItemController) Execute(c *gin.Context) {
 		return
 	}
 
-	if userID == 0 {
+	if userID == ZeroValue {
 		helper.ResponseErrorJSON(c, http.StatusBadRequest, errors.New("Cannot get session").Error())
 		return
 	}
