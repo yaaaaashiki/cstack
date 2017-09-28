@@ -2,6 +2,7 @@ package controller
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -17,9 +18,9 @@ type RegisterItemController struct {
 //input data by the front view
 type InputItemField struct {
 	Name        string `binding:"required" json:"name"`
-	Price       int    `binding:"required" json:"price" gorm:"column:price"`
+	Price       int    `binding:"required" json:"price"`
 	IconImage   string `binding:"required" json:"icon_image"`
-	Description string `json:"description" gorm:"column:description"`
+	Description string `json:"description"`
 }
 
 type RegisterItemRequest struct {
@@ -48,6 +49,10 @@ func (s *RegisterItemController) Execute(c *gin.Context) {
 	_, userID, err := helper.GetSession(c)
 
 	if err != nil {
+		fmt.Println("---------------------------------------------------------------------------------------")
+		fmt.Println("---------------------------------------------------------------------------------------")
+		fmt.Println("---------------------------------------------------------------------------------------")
+
 		helper.ResponseErrorJSON(c, http.StatusInternalServerError, err.Error())
 		return
 	}

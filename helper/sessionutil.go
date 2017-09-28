@@ -16,7 +16,7 @@ func ClearSession(g *gin.Context) {
 func GetSession(g *gin.Context) (email string, userId uint, error error) {
 	session := sessionutil.Default(g)
 	emailValue := session.Get("email")
-	userIdValue := session.Get("userId")
+	userIdValue := session.Get("userID")
 	if emailValue == nil || userIdValue == nil {
 		return "", 0, errors.New("It has not been authenticated")
 	}
