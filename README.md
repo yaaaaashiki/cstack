@@ -25,15 +25,17 @@ go get -u github.com/yaaaaashiki/cstack
 
 ## 依存パッケージ管理 
 
-[glide](https://github.com/Masterminds/glide) で管理します. 
-新たなパッケージを追加時は、
+[glide](https://github.com/Masterminds/glide) で管理します
+新たなパッケージを追加時は
+
 ```
 glide install
 ```
-上記コマンドをターミナルで打ちます.
+
+上記コマンドをターミナルで打ちます
 
 
-すると glide.yml が更新され、vendor 以下にパッケージが書き込まれます.
+すると glide.yml が更新され、vendor 以下にパッケージが書き込まれます
 
 
 ## GOPATH の設定
@@ -52,8 +54,9 @@ fi
 ```
 GOPATH/src/github.com/yaaaaashiki/cstack
 ```
-上記のディレクトリで作業します。
-`go get` でインストールすればこちらに cstack が clone されているはず
+上記のディレクトリで作業します
+
+`go get` でインストールすると上記ディレクトリに clone されているはず
 
 
 ## client 開発初回時
@@ -90,7 +93,7 @@ make run
 
 ## seed 入れ直し (test)
 
-テスト実行前には必ず実行してください.
+テスト実行前には必ず実行してください
 ```
 make testenv
 ```
