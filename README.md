@@ -59,6 +59,25 @@ GOPATH/src/github.com/yaaaaashiki/cstack
 `go get` でインストールすると上記ディレクトリに clone されているはず
 
 
+## dbconfig.yml
+
+`dbconfig.yml` の設定は各々の MySql の設定に依存する
+
+```
+datasource: root:@/cstack_dev?parseTime=true&collation=utf8_general_ci&interpolateParams=true
+
+datasource: root:@/cstack_test?parseTime=true&collation=utf8_general_ci&interpolateParams=true
+```
+
+上記は各々修正してください
+
+
+(ex: password を設定している場合)
+```
+datasource: root:password@tcp(localhost:3306)/treasure2017_dev?parseTime=true&collation=utf8_general_ci&interpolateParams=true
+```
+
+
 ## client 開発初回時
 
 ```
