@@ -21,11 +21,11 @@ func NewFindAllItemsController(findAllItemsUseCase *usecase.FindAllItemsUseCase)
 func (s *FindAllItemsController) Execute(c *gin.Context) {
 	userID := c.Param("userID")
 
-	rawRes, err := s.findAllItemsUseCase.Execute(userID)
+	res, err := s.findAllItemsUseCase.Execute(userID)
 	if err != nil {
 		helper.ResponseErrorJSON(c, http.StatusBadRequest, err.Error())
 		return
 	}
 
-	c.JSON(http.StatusOK, rawRes.Items)
+	c.JSON(http.StatusOK, res.Items)
 }
