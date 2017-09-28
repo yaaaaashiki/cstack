@@ -77,17 +77,20 @@ func (s *Server) Route() {
 	registerUserCase := usecase.NewRegisterUseCase(userRepository)
 	loginUseCase := usecase.NewLoginUseCase(userRepository)
 	findAllItemsUseCase := usecase.NewFindAllItemsUseCase(itemRepository)
+	registerItemUserCase := usecase.NewRegisterItemUseCase(itemRepository)
 
 	registerUserController := controller.NewRegisterController(registerUserCase)
 	loginController := controller.NewLoginController(loginUseCase)
 	logoutController := controller.NewLogoutController()
 	findAllItemsController := controller.NewFindAllItemsController(findAllItemsUseCase)
+	registerItemController := controller.NewRegisterItemController(registerItemUserCase)
 
 	//auth
 	api.POST("/users", registerUserController.Execute)
 	api.POST("/auth", loginController.Execute)
 	api.DELETE("/auth", logoutController.Execute)
 
-	//find all items by user id
+	//find all items by user id, register item
 	api.GET("/users/:userID/items", findAllItemsController.Execute)
+	api.POST("/users/:userID/items", registerItemController.Execute)
 }
