@@ -15,18 +15,18 @@ type RegisterItemController struct {
 
 //input data by the front view
 type InputItemField struct {
-	Name          string `binding:"required" json:"name"`
-	Email         string `binding:"required" json:"email"`
-	InputPassword string `binding:"required" json:"password"`
-	IconImage     string `binding:"required" json:"icon_image"`
+	Name        string `binding:"required" json:"name"`
+	Price       int    `binding:"required" json:"price" gorm:"column:price"`
+	IconImage   string `binding:"required" json:"icon_image"`
+	Description string `json:"description" gorm:"column:description"`
 }
 
 type RegisterItemRequest struct {
-	Name      string `binding:"required" json:"name"`
-	Email     string `binding:"required" json:"email"`
-	Salt      string `binding:"required" json:"salt"`
-	Salted    string `binding:"required" json:"salted"`
-	IconImage string `binding:"required" json:"icon_image"`
+	UserID      uint   `binding:"required" json:"user_id"`
+	Name        string `binding:"required" json:"name"`
+	Price       int    `binding:"required" json:"price" gorm:"column:price"`
+	IconImage   string `binding:"required" json:"icon_image"`
+	Description string `json:"description" gorm:"column:description"`
 }
 
 func NewRegisterItemController(registerItemUseCase *usecase.RegisterItemUseCase) *RegisterItemController {
@@ -38,22 +38,25 @@ func NewRegisterItemController(registerItemUseCase *usecase.RegisterItemUseCase)
 //Before running this function, should be judged new item or usual item.
 //If new item input the data, run this function
 func (s *RegisterItemController) Execute(c *gin.Context) {
-
-	in := &InputField{}
+	in := &InputItemField{}
 	if err := c.MustBindWith(in, binding.JSON); err != nil {
 		helper.ResponseErrorJSON(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	salt := helper.Salt(Rand)
-	salted := helper.Stretch(in.InputPassword, salt)
+	_, userID, err := helper.GetSession(c)
+
+	if err != nil {
+		helper.ResponseErrorJSON(c, http.StatusInternalServerError, err.Error())
+		return
+	}
 
 	req := &usecase.RegisterItemRequest{
-		Name:      in.Name,
-		Email:     in.Email,
-		Salt:      salt,
-		Salted:    salted,
+		UserID: userID,
+		Name: in.Name,
+		Price: in.Price,
 		IconImage: in.IconImage,
+		Description: in.Description,
 	}
 
 	res, err := s.registerItemUseCase.Execute(req)
