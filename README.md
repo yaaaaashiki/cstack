@@ -66,6 +66,7 @@ npm run build
 ```
 
 上記コマンドで、`assets/js` 配下に `bundle.js` が出力される
+
 本アプリでは、`bundle.js` のみ読み込んでいて、すべての client 周りの js は `bundle.js` として出力される
 
 
