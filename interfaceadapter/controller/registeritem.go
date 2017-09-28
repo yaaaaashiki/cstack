@@ -56,6 +56,9 @@ func (s *RegisterItemController) Execute(c *gin.Context) {
 		helper.ResponseErrorJSON(c, http.StatusInternalServerError, err.Error())
 		return
 	}
+	fmt.Println("---------------------------------------------------------------------------------------")
+	fmt.Println("---------------------------------------------------------------------------------------")
+	fmt.Println("---------------------------------------------------------------------------------------")
 
 	if userID == 0 {
 		helper.ResponseErrorJSON(c, http.StatusBadRequest, errors.New("Cannot get session").Error())
