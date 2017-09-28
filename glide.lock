@@ -1,6 +1,21 @@
-hash: 1fc6ee9909755353d81c4b894d55cf6c205394786fedaff37571d2d1dbb2b389
-updated: 2017-09-26T17:52:28.119405124+09:00
+hash: 89cf9e5485ad6737f588f1cd4cf97019bcd1286a1bd2845dfd997427f7cf5f52
+updated: 2017-09-27T18:52:55.025618858+09:00
 imports:
+- name: github.com/boj/redistore
+  version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
+- name: github.com/bradfitz/gomemcache
+  version: 1952afaa557dc08e8e0d89eafab110fb501c1a2b
+  subpackages:
+  - memcache
+- name: github.com/bradleypeabody/gorilla-sessions-memcache
+  version: 75ee37df8664a47cd5d9eb84d41e1f2b08086893
+- name: github.com/garyburd/redigo
+  version: b925df3cc15d8646e9b5b333ebaf3011385aba11
+  subpackages:
+  - internal
+  - redis
+- name: github.com/gin-contrib/sessions
+  version: 8a0c878e48374ecbc6329e3e9aacc4a524b36bd2
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
 - name: github.com/gin-gonic/gin
@@ -15,6 +30,12 @@ imports:
   version: ab9f9a6dab164b7d1246e0e688b0ab7b94d8553e
   subpackages:
   - proto
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/securecookie
+  version: e59506cc896acb7f7bf732d4fdf5e25f7ccd8983
+- name: github.com/gorilla/sessions
+  version: b61c93cb7f67533c8bfbb5ea450efc07e5833c5e
 - name: github.com/jinzhu/gorm
   version: c3bb6aaa828867eec72dd8571d111e442688f85f
 - name: github.com/jinzhu/inflection
@@ -23,6 +44,8 @@ imports:
   version: 726cc8b906e3d31c70a9671c90a13716a8d3f50d
 - name: github.com/json-iterator/go
   version: 2dc0031b26575ddf5dab09ab7795105a05575473
+- name: github.com/kidstuff/mongostore
+  version: 256d65ac5b0e35e7c5ebb3f175c0bed1e5c2b253
 - name: github.com/mattn/go-isatty
   version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
 - name: github.com/ugorji/go
@@ -35,6 +58,13 @@ imports:
   - unix
 - name: gopkg.in/go-playground/validator.v8
   version: 5f1438d3fca68893a817e4a66806cea46a9e4ebf
+- name: gopkg.in/mgo.v2
+  version: 3f83fa5005286a7fe593b055f0d7771a7dce4655
+  subpackages:
+  - bson
+  - internal/json
+  - internal/sasl
+  - internal/scram
 - name: gopkg.in/yaml.v2
   version: eb3733d160e74a9c7e442f435eb3bea458e1d19f
 testImports: []

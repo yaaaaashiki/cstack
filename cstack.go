@@ -3,6 +3,7 @@ package cstack
 import (
 	"log"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/yaaaaashiki/cstack/db"
@@ -54,6 +55,10 @@ func (s *Server) Run(addr string) {
 func (s *Server) Route() {
 	r := s.gin
 
+	// cookie manager initialize
+	store := sessions.NewCookieStore([]byte("secret"))
+	r.Use(sessions.Sessions("mysession", store))
+
 	r.Static("/image", "./assets/image")
 	r.Static("/css", "./assets/css")
 	r.Static("/js", "./assets/js")
@@ -70,14 +75,19 @@ func (s *Server) Route() {
 	itemRepository := repository.NewItemRepository(s.db)
 
 	registerUserCase := usecase.NewRegisterUseCase(userRepository)
+	loginUseCase := usecase.NewLoginUseCase(userRepository)
 	findAllItemsUseCase := usecase.NewFindAllItemsUseCase(itemRepository)
 
 	registerUserController := controller.NewRegisterController(registerUserCase)
+	loginController := controller.NewLoginController(loginUseCase)
+	logoutController := controller.NewLogoutController()
 	findAllItemsController := controller.NewFindAllItemsController(findAllItemsUseCase)
 
-	//register user
+	//auth
 	api.POST("/users", registerUserController.Execute)
+	api.POST("/auth", loginController.Execute)
+	api.DELETE("/auth", logoutController.Execute)
 
 	//find all items by user id
-	api.GET("/users/:userId/items", findAllItemsController.Execute)
+	api.GET("/users/:userID/items", findAllItemsController.Execute)
 }

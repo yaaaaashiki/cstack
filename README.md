@@ -23,6 +23,14 @@ go get -u github.com/yaaaaashiki/cstack
 * 5.7 
 
 
+## node version
+
+* 8.5.0
+
+## npm version
+
+* 5.3.0
+
 ## 依存パッケージ管理 
 
 [glide](https://github.com/Masterminds/glide) で管理します
