@@ -74,7 +74,7 @@ datasource: root:@/cstack_test?parseTime=true&collation=utf8_general_ci&interpol
 
 (ex: password を設定している場合)
 ```
-datasource: root:password@tcp(localhost:3306)/treasure2017_dev?parseTime=true&collation=utf8_general_ci&interpolateParams=true
+datasource: root:password@tcp(localhost:3306)/cstack_dev?parseTime=true&collation=utf8_general_ci&interpolateParams=true
 ```
 
 
