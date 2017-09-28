@@ -7,11 +7,11 @@ import (
 	"github.com/yaaaaashiki/cstack/domain/repository"
 )
 
-type RegisterUseCase struct {
+type RegisterItemUseCase struct {
 	itemRepository *repository.ItemRepository
 }
 
-type RegisterRequest struct {
+type RegisterItemRequest struct {
 	ID                  uint   `json:"id" gorm:"column:id"`
 	userID              uint   `json:"user_id" gorm:"column:user_id"`
 	Name                string `json:"name" gorm:"column:name"`
@@ -21,19 +21,19 @@ type RegisterRequest struct {
 	Description         string `json:"description" gorm:"column:description"`
 }
 
-type RegisterResponse struct {
+type RegisterItemResponse struct {
 	Item *model.Item
 }
 
-func NewRegisterUseCase(itemRepository *repository.ItemRepository) *RegisterUseCase {
-	return &RegisterUseCase{
+func NewRegisterItemUseCase(itemRepository *repository.ItemRepository) *RegisterItemUseCase {
+	return &RegisterItemUseCase{
 		itemRepository: itemRepository,
 	}
 }
 
 //Before running this function, should be judged new item or usual item.
 //If new item input the data, run this function
-func (f *RegisterUseCase) Execute(req *RegisterRequest) (*RegisterResponse, error) { //TODO test
+func (f *RegisterItemUseCase) Execute(req *RegisterItemRequest) (*RegisterItemResponse, error) { //TODO test
 
 	isItem, err := f.itemRepository.FindByEmailOrNil(req.Email)
 	if err != nil {
@@ -49,5 +49,5 @@ func (f *RegisterUseCase) Execute(req *RegisterRequest) (*RegisterResponse, erro
 		return nil, err
 	}
 
-	return &RegisterResponse{Item: item}, nil
+	return &RegisterItemResponse{Item: item}, nil
 }
