@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -51,11 +52,16 @@ func (s *RegisterItemController) Execute(c *gin.Context) {
 		return
 	}
 
+	if userID == 0 {
+		helper.ResponseErrorJSON(c, http.StatusBadRequest, errors.New("Cannot get session").Error())
+		return
+	}
+
 	req := &usecase.RegisterItemRequest{
-		UserID: userID,
-		Name: in.Name,
-		Price: in.Price,
-		IconImage: in.IconImage,
+		UserID:      userID,
+		Name:        in.Name,
+		Price:       in.Price,
+		IconImage:   in.IconImage,
 		Description: in.Description,
 	}
 
