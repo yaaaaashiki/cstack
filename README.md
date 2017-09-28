@@ -29,6 +29,23 @@ glide install
 すると glide.yml が更新され、vendor 以下にパッケージが書き込まれます.
 
 
+## client 開発初回時
+
+```
+npm run build
+```
+
+上記コマンドで、assets/js 配下に bundle.js が出力される
+本アプリでは、bundle.js のみ読み込んでいて、すべての client 周りの js はbundle.js として出力される
+
+
+## client 開発時
+
+```
+npm run build:watch
+```
+
+クライアントサイドのコードを watch するコマンド
 
 ## seed 入れ直し (env: develop)
 
