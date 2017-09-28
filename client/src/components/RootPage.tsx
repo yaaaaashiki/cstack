@@ -1,16 +1,8 @@
 import * as React from 'react';
 
-export default class RootPage extends React.Component<{}, State> {
-
-  componentDidMount() {
-    // need??
-  }
-
-  componentWillUnmount() {
-    // need??
-  }
-
+export default class RootPage extends React.Component<{}, {}> {
   constructor() {
+    super();
     this.state = {
       // 
     };
