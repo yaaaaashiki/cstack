@@ -2,7 +2,6 @@ package controller
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -49,16 +48,9 @@ func (s *RegisterItemController) Execute(c *gin.Context) {
 	_, userID, err := helper.GetSession(c)
 
 	if err != nil {
-		fmt.Println("---------------------------------------------------------------------------------------")
-		fmt.Println("---------------------------------------------------------------------------------------")
-		fmt.Println("---------------------------------------------------------------------------------------")
-
 		helper.ResponseErrorJSON(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	fmt.Println("---------------------------------------------------------------------------------------")
-	fmt.Println("---------------------------------------------------------------------------------------")
-	fmt.Println("---------------------------------------------------------------------------------------")
 
 	if userID == 0 {
 		helper.ResponseErrorJSON(c, http.StatusBadRequest, errors.New("Cannot get session").Error())
