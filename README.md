@@ -105,6 +105,16 @@ npm run build:watch
 
 クライアントサイドのコードを watch するコマンド
 
+
+## 初回 DB 構築時
+
+```
+make migrate/init
+
+make migrate/init/test
+```
+
+
 ## seed 入れ直し (develop)
 
 ```
