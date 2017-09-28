@@ -89,6 +89,8 @@ datasource: root:password@tcp(localhost:3306)/cstack_dev?parseTime=true&collatio
 ## client 開発初回時
 
 ```
+cd client
+
 npm run build
 ```
 
@@ -100,6 +102,8 @@ npm run build
 ## client 開発時
 
 ```
+cd client
+
 npm run build:watch
 ```
 
