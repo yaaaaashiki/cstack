@@ -5,6 +5,8 @@ import (
 	"github.com/yaaaaashiki/cstack/domain/model"
 )
 
+const Zero = 0
+
 type ItemRepository struct {
 	db *gorm.DB
 }
@@ -85,6 +87,7 @@ func (f *ItemRepository) RegisterItem(userID uint, name string, price int, iconI
 	newItem.UserID = userID
 	newItem.Name = name
 	newItem.Price = price
+	newItem.CurrentPaymentPrice = Zero
 	newItem.IconImage = iconImage
 	newItem.Description = description
 
