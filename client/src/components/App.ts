@@ -1,5 +1,6 @@
 import * as React from 'react';
+import RootPage from './RootPage';
 
-const App = () => <Root/>;
+const App = () => <RootPage/>;
 
 export default App;
