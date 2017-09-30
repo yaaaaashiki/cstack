@@ -48,7 +48,7 @@ glide install
 
 ## GOPATH の設定
 
-```
+```sh
 if [ -x "`which go`" ]; then
     export GOPATH=$HOME/go
     export PATH=$PATH::$GOPATH/bin
@@ -71,7 +71,7 @@ GOPATH/src/github.com/yaaaaashiki/cstack
 
 `dbconfig.yml` の設定は各々の MySql の設定に依存する
 
-```
+```yml
 datasource: root:@/cstack_dev?parseTime=true&collation=utf8_general_ci&interpolateParams=true
 
 datasource: root:@/cstack_test?parseTime=true&collation=utf8_general_ci&interpolateParams=true
@@ -81,7 +81,7 @@ datasource: root:@/cstack_test?parseTime=true&collation=utf8_general_ci&interpol
 
 
 (ex: password を設定している場合)
-```
+```yml
 datasource: root:password@tcp(localhost:3306)/cstack_dev?parseTime=true&collation=utf8_general_ci&interpolateParams=true
 ```
 
@@ -91,10 +91,12 @@ datasource: root:password@tcp(localhost:3306)/cstack_dev?parseTime=true&collatio
 ```
 cd client
 
+npm install
+
 npm run build
 ```
 
-上記コマンドで、`assets/js` 配下に `bundle.js` が出力される
+上記コマンドで、`node_modules` ディレクトリの中に必要なパッケージがインストールされ `assets/js` 配下に `bundle.js` が出力される
 
 本アプリでは、`bundle.js` のみ読み込んでいて、すべての client 周りの js は `bundle.js` として出力される
 
