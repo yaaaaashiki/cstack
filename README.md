@@ -37,6 +37,7 @@ go get -u github.com/yaaaaashiki/cstack
 新たなパッケージを追加時は
 
 ```
+glide get github.com/yaaaaashiki/cstack
 glide install
 ```
 
@@ -45,6 +46,13 @@ glide install
 
 すると glide.yml が更新され、vendor 以下にパッケージが書き込まれます
 
+パッケージを最新バージョンに更新するときは
+
+```
+glide up
+```
+
+で更新します
 
 ## GOPATH の設定
 
