@@ -3,6 +3,7 @@ package controller
 import (
 	"errors"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
@@ -41,18 +42,29 @@ func NewRegisterItemController(registerItemUseCase *usecase.RegisterItemUseCase)
 //Before running this function, should be judged new item or usual item.
 //If new item input the data, run this function
 func (s *RegisterItemController) Execute(c *gin.Context) {
+	rawuserID, err := strconv.Atoi(c.Param("userID"))
+	userID := uint(rawuserID)
+
+	if err != nil {
+		helper.ResponseErrorJSON(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
 	in := &InputItemField{}
 	if err := c.MustBindWith(in, binding.JSON); err != nil {
 		helper.ResponseErrorJSON(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	_, userID, err := helper.GetSession(c)
+	//TODO: Should get following method by the cookies
+	/*
+		_, userID, err := helper.GetSession(c)
 
-	if err != nil {
-		helper.ResponseErrorJSON(c, http.StatusInternalServerError, err.Error())
-		return
-	}
+		if err != nil {
+			helper.ResponseErrorJSON(c, http.StatusInternalServerError, err.Error())
+			return
+		}
+	*/
 
 	if userID == ZeroValue {
 		helper.ResponseErrorJSON(c, http.StatusBadRequest, errors.New("Cannot get session").Error())
