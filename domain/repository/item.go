@@ -75,14 +75,16 @@ func (f *ItemRepository) FindAllByUserIDOrNil(userID string) ([]model.Item, erro
 
 //If first return value is true, input data is duplicate in items table
 func (f *ItemRepository) IsExistItem(userID uint, name string) (bool, error) {
-	items := []model.Item{}
-	res := f.db.Raw(`select * from items where user_id = ? and name = ?`, userID, name).Find(&items)
-	if err := res.Error; err != nil {
-		return false, err
+	item := model.Item{}
+	res := f.db.Raw(`select * from items where user_id = ? and name = ?`, userID, name).Find(&item)
+	if res.RecordNotFound() {
+		return false, nil
+	} else {
+		if res.Error != nil {
+			return true, res.Error
+		}
 	}
-
-	//TODO Implement
-	return false, nil
+	return true, nil
 }
 
 func (f *ItemRepository) RegisterItem(userID uint, name string, price int, iconImage string, description string) (*model.Item, error) {
