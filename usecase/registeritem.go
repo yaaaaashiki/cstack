@@ -34,12 +34,12 @@ func NewRegisterItemUseCase(itemRepository *repository.ItemRepository) *Register
 //If new item input the data, run this function
 func (f *RegisterItemUseCase) Execute(req *RegisterItemRequest) (*RegisterItemResponse, error) { //TODO test
 
-	isExist, err := f.itemRepository.IsExistItem(req.UserID, req.Name)
+	exist, err := f.itemRepository.IsExistItem(req.UserID, req.Name)
 
 	if err != nil {
 		return nil, err
 	}
-	if isExist {
+	if exist {
 		return nil, errors.New("Duplicate user cannnot create new user")
 	}
 
