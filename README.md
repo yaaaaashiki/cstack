@@ -18,7 +18,7 @@ go get -u github.com/yaaaaashiki/cstack
 * 1.9 
 
 
-## mysql version
+## MySQL version
 
 * 5.7 
 
@@ -77,7 +77,7 @@ GOPATH/src/github.com/yaaaaashiki/cstack
 
 ## dbconfig.yml
 
-`dbconfig.yml` の設定は各々の MySql の設定に依存する
+`dbconfig.yml` の設定は各々の MySQL の設定に依存する
 
 ```yml
 datasource: root:@/cstack_dev?parseTime=true&collation=utf8_general_ci&interpolateParams=true
