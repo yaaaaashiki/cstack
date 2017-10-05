@@ -42,8 +42,8 @@ func NewRegisterItemController(registerItemUseCase *usecase.RegisterItemUseCase)
 //Before running this function, should be judged new item or usual item.
 //If new item input the data, run this function
 func (s *RegisterItemController) Execute(c *gin.Context) {
-	rawuserID, err := strconv.Atoi(c.Param("userID"))
-	userID := uint(rawuserID)
+	rawUserID, err := strconv.Atoi(c.Param("userID"))
+	userID := uint(rawUserID)
 
 	if err != nil {
 		helper.ResponseErrorJSON(c, http.StatusBadRequest, err.Error())
@@ -52,7 +52,7 @@ func (s *RegisterItemController) Execute(c *gin.Context) {
 
 	in := &InputItemField{}
 	if err := c.MustBindWith(in, binding.JSON); err != nil {
-		helper.ResponseErrorJSON(c, http.StatusInternalServerError, err.Error())
+		helper.ResponseErrorJSON(c, http.StatusBadRequest, err.Error())
 		return
 	}
 
