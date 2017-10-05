@@ -5,6 +5,8 @@ import (
 	"github.com/yaaaaashiki/cstack/domain/model"
 )
 
+const Zero = 0
+
 type ItemRepository struct {
 	db *gorm.DB
 }
@@ -71,10 +73,26 @@ func (f *ItemRepository) FindAllByUserIDOrNil(userID string) ([]model.Item, erro
 	return items, nil
 }
 
-func (f *ItemRepository) RegisterItem(name string, price int, iconImage string, description string) (*model.Item, error) {
+//If first return value is true, input data is duplicate in items table
+func (f *ItemRepository) IsExistItem(userID uint, name string) (bool, error) {
+	item := model.Item{}
+	res := f.db.Raw(`select * from items where user_id = ? and name = ?`, userID, name).Find(&item)
+	if res.RecordNotFound() {
+		return false, nil
+	} else {
+		if res.Error != nil {
+			return true, res.Error
+		}
+	}
+	return true, nil
+}
+
+func (f *ItemRepository) RegisterItem(userID uint, name string, price int, iconImage string, description string) (*model.Item, error) {
 	newItem := model.Item{}
+	newItem.UserID = userID
 	newItem.Name = name
 	newItem.Price = price
+	newItem.CurrentPaymentPrice = Zero
 	newItem.IconImage = iconImage
 	newItem.Description = description
 

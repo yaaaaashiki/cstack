@@ -13,14 +13,15 @@ func ClearSession(g *gin.Context) {
 	session.Save()
 }
 
-func GetSession(g *gin.Context) (email string, userId uint, error error) {
+func GetSession(g *gin.Context) (string, uint, error) {
 	session := sessionutil.Default(g)
 	emailValue := session.Get("email")
-	userIdValue := session.Get("userId")
-	if emailValue == nil || userIdValue == nil {
+	userIDValue := session.Get("userID")
+
+	if emailValue == nil || userIDValue == nil {
 		return "", 0, errors.New("It has not been authenticated")
 	}
-	return emailValue.(string), userIdValue.(uint), nil
+	return emailValue.(string), userIDValue.(uint), nil
 }
 
 func SaveSession(g *gin.Context, email string, userID uint) error {
